@@ -1,0 +1,7 @@
+item,quantidade_planejada,papel,etapa,compatibilidade,modelo_confirmado,preco_cotado_brl,origem_cotacao,data_cotacao
+Computador para GIS e Python,1,"Mapas, análise e painel",Essencial,8 a 16 GB de RAM como referência de exercícios pequenos.,,,,
+Smartphone com câmera e GNSS,1,Formulário de campo e registro de evidências,Campo,Registrar precisão e contexto da coleta.,,,,
+Armazenamento para cópias e power bank,1 conjunto,Continuidade de coleta e backup,Campo,Planejar conforme duração da campanha.,,,,
+Câmera terrestre ou armadilha fotográfica,Conforme desenho amostral,Registro independente por campanha,Opcional,Definir esforço de amostragem e autorizações antes da campanha.,,,,
+Dados orbitais e camadas de cobertura,Conforme recorte,Contexto do habitat,Essencial,Não exige possuir satélite ou câmera orbital.,,,,
+Revisão por especialista em taxonomia,Equipe parceira,Conferência de rótulos e referência,Campo,Votação e modelo não substituem a avaliação oficial de risco.,,,,

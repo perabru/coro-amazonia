@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "name": "Grade didática sem ocorrências reais",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "properties": {
+        "id": "DEMO-E1",
+        "origem": "synthetic",
+        "taxon": "taxon-didatico"
+      }
+    }
+  ]
+}
