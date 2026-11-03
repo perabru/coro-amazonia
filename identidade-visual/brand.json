@@ -1,0 +1,188 @@
+{
+  "slug": "coro-amazonia",
+  "name": "CORO",
+  "short": "CORO",
+  "domain": "Biodiversidade amazônica · inteligência coletiva",
+  "tagline": "Muitos olhares. Evidências revisáveis.",
+  "concept": [
+    "Uma árvore de três folhas representa registros que se encontram: observação em campo, imagem do território e revisão coletiva. O caule comum dá unidade a evidências de origens diferentes.",
+    "A linguagem aproxima caderno de campo e publicação científica. Verde profundo, argila e papel quente se combinam com títulos serifados, contornos orgânicos e espaços de leitura tranquilos."
+  ],
+  "personality": [
+    "Atento",
+    "Orgânico",
+    "Confiável"
+  ],
+  "colors": {
+    "bg": "#F4F0E5",
+    "panel": "#FFFCF5",
+    "ink": "#173F2B",
+    "muted": "#536B58",
+    "line": "#C6D1BD",
+    "accent": "#A9462C",
+    "second": "#315B3F",
+    "paper": "#F4F0E5",
+    "dark": "#173F2B"
+  },
+  "palette": [
+    {
+      "name": "Verde floresta",
+      "hex": "#173F2B",
+      "role": "Marca, títulos e fundos institucionais."
+    },
+    {
+      "name": "Verde folha",
+      "hex": "#315B3F",
+      "role": "Diagramas, conexões e navegação secundária."
+    },
+    {
+      "name": "Argila",
+      "hex": "#A9462C",
+      "role": "Chamadas e elementos de atenção."
+    },
+    {
+      "name": "Papel de campo",
+      "hex": "#F4F0E5",
+      "role": "Fundo principal de documentos e páginas."
+    },
+    {
+      "name": "Branco semente",
+      "hex": "#FFFCF5",
+      "role": "Cartões e superfícies de leitura."
+    }
+  ],
+  "fonts": {
+    "display": "Lora",
+    "body": "Source Sans 3",
+    "mono": "JetBrains Mono"
+  },
+  "motif": "Folhas, ramificações e curvas de nível com desenho orgânico.",
+  "graphic_rules": [
+    "Combinar margens generosas com títulos serifados; evitar neon e textura pesada.",
+    "Usar curvas suaves para conexão entre registros, revisões e território.",
+    "Acompanhar fotos com origem, contexto e situação da identificação.",
+    "Reservar a argila para chamadas; o verde permanece dominante."
+  ],
+  "voice": {
+    "do": [
+      "Mostrar origem e situação de revisão do registro.",
+      "Convidar à observação cuidadosa.",
+      "Explicitar incerteza quando a identificação estiver em análise."
+    ],
+    "dont": [
+      "Tratar votação como prova científica definitiva.",
+      "Declarar extinção a partir de uma imagem isolada.",
+      "Romantizar comunidades ou usar povos tradicionais como decoração."
+    ],
+    "example": "Um registro, vários olhares: consulte a origem e acompanhe a revisão."
+  },
+  "applications": [
+    "Ficha de registro com fotografia, localização tratada e estado de revisão.",
+    "Banner científico com títulos serifados e diagramas de evidências.",
+    "Cartão de participação com chamada em argila e ilustração botânica."
+  ],
+  "cautions": [
+    "Categorias de ameaça devem vir de avaliações oficiais identificadas e versionadas.",
+    "Exibir localização de espécies sensíveis conforme o protocolo do projeto."
+  ],
+  "version": "1.0",
+  "year": 2027,
+  "created": "2026-11-03",
+  "logo": {
+    "concept": "Três folhas convergem em uma ramificação comum; um ponto em argila sugere a contribuição humana.",
+    "grid": "Módulo de 100 × 100 unidades. Eixo central em x=50; três folhas organizadas entre y=12 e y=66; caule de 6 unidades até y=88.",
+    "clear_space": "1x em todos os lados; x = 10 unidades do símbolo de 100 × 100. A área externa de proteção não está incluída no arquivo.",
+    "min_width_print_mm": 40,
+    "min_width_digital_px": 180,
+    "symbol_min_px": 32,
+    "symbol_min_print_mm": 10,
+    "unit": 10,
+    "symbol_viewbox": [
+      0,
+      0,
+      100,
+      100
+    ],
+    "positive_colors": [
+      "#173F2B",
+      "#A9462C"
+    ],
+    "negative_colors": [
+      "#F4F0E5",
+      "#EBC8A2"
+    ],
+    "horizontal_viewbox": [
+      0,
+      0,
+      261.95,
+      100
+    ],
+    "files": [
+      "assets/marca-horizontal.svg",
+      "assets/marca-negativa.svg",
+      "assets/marca-monocromatica.svg",
+      "assets/marca-vertical.svg",
+      "assets/simbolo.svg",
+      "assets/simbolo-negativo.svg",
+      "assets/simbolo-monocromatico.svg",
+      "assets/padrao.svg"
+    ],
+    "color_rules": "A versão positiva usa #173F2B e #A9462C sobre #F4F0E5. A versão negativa usa #F4F0E5 e #EBC8A2 sobre #173F2B. Essas variantes são específicas da marca; não substituir as cores por aproximação. A versão monocromática usa uma única tinta, #173F2B."
+  },
+  "font_files": {
+    "display_regular": "fontes/lora-regular.ttf",
+    "display_bold": "fontes/lora-bold.ttf",
+    "body_regular": "fontes/source-sans-3-regular.ttf",
+    "body_bold": "fontes/source-sans-3-bold.ttf",
+    "mono_regular": "fontes/jetbrains-mono-regular.ttf"
+  },
+  "font_web_files": {
+    "display": "fontes/lora.woff",
+    "body": "fontes/source-sans-3.woff",
+    "mono": "fontes/jetbrains-mono.woff"
+  },
+  "contrast_pairs": [
+    {
+      "label": "Texto principal",
+      "foreground": "#173F2B",
+      "background": "#F4F0E5",
+      "ratio": 10.35,
+      "minimum": 4.5
+    },
+    {
+      "label": "Texto em painel",
+      "foreground": "#173F2B",
+      "background": "#FFFCF5",
+      "ratio": 11.5,
+      "minimum": 4.5
+    },
+    {
+      "label": "Texto secundário",
+      "foreground": "#536B58",
+      "background": "#F4F0E5",
+      "ratio": 5.11,
+      "minimum": 4.5
+    },
+    {
+      "label": "Chamada principal",
+      "foreground": "#F4F0E5",
+      "background": "#A9462C",
+      "ratio": 5.12,
+      "minimum": 4.5
+    },
+    {
+      "label": "Link de destaque",
+      "foreground": "#A9462C",
+      "background": "#F4F0E5",
+      "ratio": 5.12,
+      "minimum": 4.5
+    }
+  ],
+  "font_weights": {
+    "display_regular": 400,
+    "display_bold": 700,
+    "body_regular": 400,
+    "body_bold": 700,
+    "mono_regular": 400
+  }
+}
