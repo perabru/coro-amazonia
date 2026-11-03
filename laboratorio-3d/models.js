@@ -1,0 +1,14 @@
+import { createDeviceKit } from './device-kit.js';
+export function buildProject(THREE,palette){
+  const k=createDeviceKit(THREE,palette),parts=k.phone('CORO','phone',[-7,3.95,2.2],-.13);
+  parts.push(k.makePart('workstation','Notebook · mapas e revisão',k.laptop('CORO'),[2.5,.55,-4],[1.5,1.4,-1.8],'Ambiente de GIS, preparação das imagens, revisão taxonômica e análise. Os mapas na tela são demonstrativos.','Notebook de laboratório','Proporções ilustrativas de um notebook compacto.'));
+  parts.push(k.makePart('field_camera','Armadilha fotográfica · registro opcional',k.fieldCamera(),[-1.3,3.1,2.4],[0,.6,2.4],'Câmera terrestre autônoma com lente, iluminadores infravermelhos e janela de detecção. Cada campanha registra posição, tempo e esforço amostral; o equipamento é opcional no desenho do estudo.','Armadilha fotográfica genérica','Gabinete, lentes e sensores ilustrativos; modelo de campo a selecionar.'));
+  parts.push(k.makePart('storage','SSD · preservação de evidências',k.storage('CORO / EVIDÊNCIAS'),[5.6,.55,3.6],[2.2,.3,1.8],'Cópias de fotos, metadados, camadas e resultados com rastreabilidade. Registros sensíveis precisam de acesso restrito e apresentação agregada.','SSD USB externo ilustrativo','Capacidade definida pelo volume de coleta.','Armazenamento'));
+  const connections=[
+    {id:'field-sync',from:'phone_frame',to:'workstation',fromPoint:[1.7,0,0],toPoint:[-5,.2,0],color:'#b25c3b',label:'Observação + foto + localização',detail:'Sincronização lógica por HTTPS quando houver conexão. Registrar precisão, consentimento e contexto; não presumir envio contínuo em campo.',kind:'network'},
+    {id:'camera-import',from:'field_camera',to:'workstation',fromPoint:[1.75,-1,0],toPoint:[-5,.2,1],color:'#3e8e68',label:'Importação do cartão',detail:'Transferência local dos arquivos e planilha de esforço. A curva representa o fluxo de importação, não presume Wi-Fi na câmera.',kind:'data'},
+    {id:'evidence-copy',from:'workstation',to:'storage',fromPoint:[6.3,0,-.7],toPoint:[0,0,1.42],color:'#7898aa',label:'Originais + backup verificado',detail:'Cópias com checksum mantêm o original separado dos derivados. Testar a leitura e a restauração.',kind:'data'},
+    {id:'phone-display',from:'phone_board',to:'phone_display',fromPoint:[.7,2.3,.15],toPoint:[.7,2.3,.24],color:'#93a47d',label:'Formulário no dispositivo',detail:'Relação funcional ilustrativa entre processamento e display; não é esquema de reparo.',kind:'data'}
+  ];
+  return{parts,connections,camera:{position:[19,15,25],target:[0,3,0],minDistance:13,maxDistance:72},note:'Modelos autorais de dispositivos de coleta e análise. A proporção externa do telefone segue o iPhone 15; sua placa e bateria são esquemáticas. A câmera é uma representação de categoria, sem modelo de compra selecionado. As ligações mostram transferência de informação e não pinagens elétricas.'};
+}

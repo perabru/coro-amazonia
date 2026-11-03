@@ -1,0 +1,402 @@
+{
+  "eyebrow": "CORO · laboratório de evidências",
+  "headline": "Da observação ao conhecimento.",
+  "intro": "Construa uma plataforma que transforma registros de campo em evidências revisáveis. Explore os dispositivos, a captura, a sincronização e a análise geográfica em uma mesma cena 3D.",
+  "scope": "O celular, a estação de trabalho e a câmera de campo representam meios de coleta e análise. As conexões são fluxos de dados, não esquemas elétricos. O consenso organiza observações; a avaliação oficial do risco de extinção pertence às fontes e aos especialistas responsáveis.",
+  "stats": [
+    {
+      "value": "8",
+      "label": "etapas práticas"
+    },
+    {
+      "value": "GeoJSON",
+      "label": "dados espaciais"
+    },
+    {
+      "value": "Revisão",
+      "label": "evidência e consenso"
+    }
+  ],
+  "steps": [
+    {
+      "id": "etapa-1",
+      "title": "Defina o recorte e o esforço",
+      "kicker": "Pergunta de pesquisa",
+      "body": "Escolha uma campanha pequena com pergunta, grupo taxonômico e área definidos. A utilidade dos dados depende de saber como foram observados.",
+      "actions": [
+        "Descreva unidade amostral, duração, horários e método. Registre também visitas ou períodos em que não houve observação.",
+        "Escolha quais evidências serão coletadas: fotografia, áudio, anotação e coordenada. Defina quem revisa e quais identificações são aceitáveis.",
+        "Registre autorização de acesso e uso dos dados. Combine como tratar registros de espécies sensíveis antes da publicação.",
+        "Preencha o protocolo de campo e crie identificadores para campanha, ponto, visita e evidência."
+      ],
+      "check": "Uma pessoa de fora entende onde, quando e como cada registro será obtido.",
+      "parts": [
+        "phone_frame",
+        "field_camera",
+        "workstation"
+      ]
+    },
+    {
+      "id": "etapa-2",
+      "title": "Construa o formulário de coleta",
+      "kicker": "Captura móvel",
+      "body": "Faça o formulário funcionar em campo e em conexão instável. Um registro deve conservar o original e o contexto de aquisição.",
+      "actions": [
+        "Solicite data/hora, coordenada, sistema de referência, precisão informada, autor, método e campanha. Permita corrigir um campo com justificativa.",
+        "Capture a imagem com identificação única e preserve o original. Miniaturas e imagens comprimidas devem apontar para ele.",
+        "Mostre ao coletor a precisão disponível e a condição do registro. Uma coordenada sem contexto não deve aparecer como localização exata.",
+        "Salve rascunhos e fila local em IndexedDB. Mostre pendente, enviado e confirmado; fechar a tela não deve apagar o trabalho ainda não sincronizado."
+      ],
+      "check": "Um registro feito sem rede reaparece ao reabrir o formulário e mantém imagem e metadados.",
+      "parts": [
+        "phone_frame",
+        "phone_display",
+        "phone_board",
+        "phone_battery"
+      ]
+    },
+    {
+      "id": "etapa-3",
+      "title": "Sincronize sem perder a origem",
+      "kicker": "Ingestão",
+      "body": "Ao receber a observação, a API precisa confirmar integridade e autoria antes de torná-la disponível para revisão.",
+      "actions": [
+        "Envie registro e mídia com identificadores estáveis. Repetir o envio da mesma evidência deve atualizar o estado, não criar uma cópia.",
+        "Valide formato, tamanho, campos obrigatórios e coordenadas. Grave original, checksum e registro das transformações.",
+        "Guarde metadados e relações no PostgreSQL/PostGIS; mantenha as mídias em armazenamento de objetos com controle de acesso.",
+        "Separe localização de trabalho e localização pública. A versão generalizada deve registrar que foi generalizada e com qual incerteza."
+      ],
+      "check": "A confirmação do servidor identifica a evidência única e a mídia correspondente, mesmo depois de uma repetição do envio.",
+      "parts": [
+        "phone_display",
+        "storage",
+        "workstation"
+      ]
+    },
+    {
+      "id": "etapa-4",
+      "title": "Organize uma revisão independente",
+      "kicker": "Inteligência coletiva",
+      "body": "Colete decisões individuais antes de mostrar o resultado do grupo, quando isso fizer parte do desenho do estudo. Preserve dúvida e discordância como informação.",
+      "actions": [
+        "Crie tarefas de avaliação com evidência, táxon candidato, resposta e grau de confiança. Permita marcar qualidade insuficiente e identificação inconclusiva.",
+        "Imponha unicidade por avaliador e evidência. Registre alterações de voto, em vez de contar a mesma pessoa várias vezes.",
+        "Comece com pesos iguais; qualquer peso diferente precisa de regra e validação. Separe confiança autodeclarada de acerto observado.",
+        "Execute consenso.py para estudar a agregação sintética. O rótulo ausência desse exercício significa voto sobre a evidência; não prova ausência de uma espécie no ambiente."
+      ],
+      "check": "Um resultado pode ser auditado até os votos originais e não oculta a categoria indeterminada.",
+      "parts": [
+        "workstation",
+        "phone_display"
+      ],
+      "code": {
+        "language": "bash",
+        "text": "cd materiais\npython consenso.py"
+      }
+    },
+    {
+      "id": "etapa-5",
+      "title": "Acrescente o contexto espacial",
+      "kicker": "Mapas e camadas",
+      "body": "Relacione evidências com camadas de habitat sem misturar escala, data ou significado. Um mapa bonito precisa de uma transformação espacial correta.",
+      "actions": [
+        "Abra amostra_demo.geojson para estudar a estrutura e depois importe os dados próprios. Verifique longitude, latitude e sistema de referência.",
+        "Selecione camadas do TerraBrasilis adequadas à pergunta, registrando produto, versão, período, resolução e data de obtenção.",
+        "Ao cruzar geometrias, transforme coordenadas quando necessário. Atribuir um SRID não reprojeta os números; trate essa diferença explicitamente.",
+        "Mantenha camadas orbitais, observações e resultados de revisão como entidades distintas, ligadas por área e período documentados."
+      ],
+      "check": "A camada coincide com pontos de referência conhecidos, e cada sobreposição informa data e escala.",
+      "parts": [
+        "workstation",
+        "storage"
+      ]
+    },
+    {
+      "id": "etapa-6",
+      "title": "Compare consenso com referência",
+      "kicker": "Analisar",
+      "body": "Avalie se o processo ajuda a organizar evidências. Use um conjunto revisado por especialista e registre os desacordos que ainda existem.",
+      "actions": [
+        "Separe campanhas ou localidades entre desenvolvimento e avaliação. Evite colocar imagens quase idênticas do mesmo evento nos dois conjuntos.",
+        "Calcule resultados por classe, qualidade e origem; apresente tamanho da amostra, erro e proporção de casos inconclusivos.",
+        "Relacione presença observada ao esforço de amostragem. Um registro ausente pode resultar de falta de detecção.",
+        "Quando exibir categoria de risco, mantenha fonte institucional, data e versão próprias. Não calcule essa categoria a partir da votação do aplicativo."
+      ],
+      "check": "O relatório distingue identificação, detecção, consenso e risco oficial, com evidências para cada campo.",
+      "parts": [
+        "workstation",
+        "field_camera"
+      ]
+    },
+    {
+      "id": "etapa-7",
+      "title": "Teste o fluxo em uma campanha piloto",
+      "kicker": "Validar no contexto",
+      "body": "Uma coleta curta e controlada revela problemas que dados prontos não mostram: bateria, precisão, conectividade e qualidade da fotografia.",
+      "actions": [
+        "Teste o formulário com rede disponível, indisponível e intermitente; confira retomada e contagem de registros.",
+        "Compare uma amostra do banco com os originais e o diário. Confira fuso, coordenada, metadados e vínculos.",
+        "Se usar armadilha fotográfica, registre posição, configuração, instalação, retirada e tempo efetivo de operação. O equipamento é opcional e depende do desenho amostral.",
+        "Teste papéis de coletor, avaliador e revisor. A localização restrita não deve vazar pela API, miniatura, exportação ou metadado público."
+      ],
+      "check": "O piloto termina com registros conciliados e uma lista de correções baseada em falhas observadas.",
+      "parts": [
+        "phone_display",
+        "field_camera",
+        "storage"
+      ]
+    },
+    {
+      "id": "etapa-8",
+      "title": "Publique um conjunto rastreável",
+      "kicker": "Entregar",
+      "body": "A entrega deve permitir reconstituir o resultado desde a evidência original. Mostre também as decisões que ficaram inconclusivas.",
+      "actions": [
+        "Documente esquema do banco, regras de sincronização e permissões. Entregue um conjunto de demonstração que possa ser compartilhado.",
+        "Exporte dados com identificadores, unidades, coordenadas permitidas e fontes. Registre a versão da camada e do algoritmo de consenso.",
+        "Prepare mapa, tabela de resultados, exemplos de discordância e roteiro de revisão. Explique o papel do especialista.",
+        "Na monografia e no artigo, descreva amostragem, avaliação e limitações; resultados dos CSV sintéticos não são observações da Amazônia."
+      ],
+      "check": "Outra equipe consegue localizar a origem de um ponto do mapa e repetir seu processamento.",
+      "parts": [
+        "workstation",
+        "storage",
+        "phone_display"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "name": "Coleta móvel",
+      "model": "Smartphone com câmera e GNSS; iPhone 15 na referência visual",
+      "quantity": "1",
+      "role": "Formulário, fotografia, coordenada e fila local.",
+      "selection": "O aparelho real pode variar; registre precisão e contexto.",
+      "sourceUrl": "https://support.apple.com/pt-br/111831",
+      "sourceLabel": "Referência externa Apple"
+    },
+    {
+      "name": "Estação de análise",
+      "model": "Computador para Python e GIS",
+      "quantity": "1",
+      "role": "Revisão, mapas e avaliação dos resultados.",
+      "selection": "Dimensionar conforme imagens e recorte espacial; começar pequeno.",
+      "sourceUrl": "https://www.qgis.org/",
+      "sourceLabel": "QGIS"
+    },
+    {
+      "name": "Câmera de campo",
+      "model": "Armadilha fotográfica representativa",
+      "quantity": "Opcional",
+      "role": "Registro independente por ponto e campanha.",
+      "selection": "A seleção depende do desenho amostral e do esforço registrado.",
+      "sourceUrl": "https://docs.gbif.org/camera-trap-guide/en/",
+      "sourceLabel": "Guia de dados de armadilhas"
+    },
+    {
+      "name": "Energia em campo",
+      "model": "Power bank e cabos compatíveis",
+      "quantity": "1 conjunto",
+      "role": "Continuidade do dispositivo móvel.",
+      "selection": "Medir autonomia na campanha piloto, incluindo câmera e GNSS.",
+      "sourceUrl": "https://support.apple.com/pt-br/111831",
+      "sourceLabel": "Dispositivo de referência"
+    },
+    {
+      "name": "Preservação",
+      "model": "Armazenamento de objetos e cópia independente",
+      "quantity": "1 conjunto",
+      "role": "Originais e recuperação do conjunto.",
+      "selection": "Verificar integridade e testar restauração.",
+      "sourceUrl": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
+      "sourceLabel": "Armazenamento de objetos"
+    },
+    {
+      "name": "Contexto orbital",
+      "model": "Camadas INPE/TerraBrasilis",
+      "quantity": "Por recorte",
+      "role": "Contexto de cobertura e mudança da vegetação.",
+      "selection": "Registrar produto, versão e período; não requer possuir satélite.",
+      "sourceUrl": "https://terrabrasilis.dpi.inpe.br/",
+      "sourceLabel": "TerraBrasilis"
+    },
+    {
+      "name": "Referência taxonômica",
+      "model": "Revisão especializada e fontes institucionais",
+      "quantity": "Equipe parceira",
+      "role": "Conferência de rótulos e interpretação.",
+      "selection": "Separar observação, consenso e categoria oficial.",
+      "sourceUrl": "https://nrl.iucnredlist.org/resources/categories-and-criteria",
+      "sourceLabel": "Categorias e critérios IUCN"
+    }
+  ],
+  "connections": [
+    {
+      "to": "Arquivo original",
+      "protocol": "Imagem + metadados",
+      "detail": "Identificador, horário, ponto, método e esforço; a câmera pode importar por cartão.",
+      "type": "data",
+      "from": "Celular / câmera de campo"
+    },
+    {
+      "to": "Fila local",
+      "protocol": "IndexedDB",
+      "detail": "Rascunho persistido com estado de sincronização.",
+      "type": "data",
+      "from": "Formulário offline"
+    },
+    {
+      "to": "API de evidências",
+      "protocol": "HTTPS · sincronização",
+      "detail": "ID estável, repetição idempotente e confirmação de integridade.",
+      "type": "network",
+      "from": "Fila local"
+    },
+    {
+      "to": "PostGIS + armazenamento",
+      "protocol": "Metadados e mídia",
+      "detail": "Geometria e relações no banco; originais preservados por chave.",
+      "type": "data",
+      "from": "API"
+    },
+    {
+      "to": "Revisão / consenso",
+      "protocol": "Votos rastreáveis",
+      "detail": "Um avaliador por evidência; dúvida e revisão registradas.",
+      "type": "data",
+      "from": "Avaliadores"
+    },
+    {
+      "to": "Estação GIS",
+      "protocol": "Camadas geográficas",
+      "detail": "Arquivo oficial com produto, período, versão e CRS.",
+      "type": "data",
+      "from": "INPE / TerraBrasilis"
+    },
+    {
+      "to": "Mapa público / exportação",
+      "protocol": "Dados autorizados",
+      "detail": "Localização generalizada quando necessário; risco com fonte institucional.",
+      "type": "network",
+      "from": "Conjunto revisado"
+    }
+  ],
+  "stack": [
+    {
+      "name": "React + IndexedDB",
+      "role": "Formulário móvel e sincronização pendente.",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API"
+    },
+    {
+      "name": "FastAPI + PostGIS",
+      "role": "Evidências, revisões e consultas espaciais.",
+      "href": "https://fastapi.tiangolo.com/"
+    },
+    {
+      "name": "GeoPandas + Rasterio",
+      "role": "Preparação de vetores e rasters.",
+      "href": "https://geopandas.org/"
+    },
+    {
+      "name": "MapLibre GL JS",
+      "role": "Mapa e camadas de contexto.",
+      "href": "https://maplibre.org/maplibre-gl-js/docs/"
+    },
+    {
+      "name": "Python + scikit-learn",
+      "role": "Consenso e avaliação com conjuntos separados.",
+      "href": "https://scikit-learn.org/stable/"
+    }
+  ],
+  "deliverables": [
+    "Protocolo de campo e dicionário de dados.",
+    "Formulário com fila local e sincronização demonstrada.",
+    "Banco geográfico e originais rastreáveis.",
+    "Revisão individual, consenso e comparação com especialista.",
+    "Mapa com origem, escala e publicação espacial controlada."
+  ],
+  "checks": [
+    "Toda coordenada possui contexto e incerteza conhecida ou declarada desconhecida.",
+    "Sincronizar duas vezes não duplica uma observação.",
+    "Uma pessoa não é contada como vários avaliadores.",
+    "Ausência de observação não é tratada automaticamente como ausência da espécie.",
+    "Categoria de risco tem fonte e data independentes do consenso."
+  ],
+  "references": [
+    {
+      "title": "GBIF · georreferenciamento",
+      "url": "https://docs.gbif.org/georeferencing-best-practices/1.0/en/",
+      "why": "Coordenadas, sistema de referência e incerteza."
+    },
+    {
+      "title": "GBIF · armadilhas fotográficas",
+      "url": "https://docs.gbif.org/camera-trap-guide/en/",
+      "why": "Campanhas, esforço e organização dos registros."
+    },
+    {
+      "title": "GBIF · dados de espécies sensíveis",
+      "url": "https://docs.gbif.org/sensitive-species-best-practices/master/en/",
+      "why": "Generalização espacial documentada."
+    },
+    {
+      "title": "INPE · TerraBrasilis",
+      "url": "https://terrabrasilis.dpi.inpe.br/",
+      "why": "Camadas oficiais e contexto de cobertura."
+    },
+    {
+      "title": "PostGIS · ST_Transform",
+      "url": "https://www.postgis.net/docs/manual-dev/br/ST_Transform.html",
+      "why": "Transformação de coordenadas entre sistemas."
+    },
+    {
+      "title": "IUCN · categorias e critérios",
+      "url": "https://nrl.iucnredlist.org/resources/categories-and-criteria",
+      "why": "Referência para distinguir risco oficial de consenso de observação."
+    }
+  ],
+  "faq": [
+    {
+      "q": "O aplicativo declara que uma espécie está em extinção?",
+      "a": "Não a partir de votos. A interface pode apresentar uma avaliação institucional com fonte e data; consenso de uma observação e categoria de risco são informações diferentes."
+    },
+    {
+      "q": "Preciso de câmera orbital própria?",
+      "a": "Não. O projeto utiliza camadas e dados existentes com origem documentada. Smartphone e câmera de campo atendem à coleta terrestre, conforme o protocolo."
+    },
+    {
+      "q": "Se ninguém viu a espécie, ela está ausente?",
+      "a": "Não necessariamente. O resultado depende de esforço, método e chance de detecção. Registre o que foi observado e as condições da amostragem."
+    },
+    {
+      "q": "A montagem 3D exige abrir o celular?",
+      "a": "Não. A separação das camadas é didática; o projeto utiliza câmera, localização e navegador sem modificar o dispositivo."
+    }
+  ],
+  "downloads": [
+    {
+      "label": "Kit de estudos",
+      "href": "../materiais/kit-estudos-coro.zip",
+      "detail": "GeoJSON, observações sintéticas e exercícios."
+    },
+    {
+      "label": "Protocolo de campo",
+      "href": "../materiais/protocolo_campo.md",
+      "detail": "Campos e regras para coleta e revisão."
+    },
+    {
+      "label": "Algoritmo didático de consenso",
+      "href": "../materiais/consenso.py",
+      "detail": "Votação ponderada sobre o conjunto sintético."
+    },
+    {
+      "label": "Amostra geográfica",
+      "href": "../materiais/amostra_demo.geojson",
+      "detail": "Estrutura de dados para exploração local."
+    },
+    {
+      "label": "BOM editável",
+      "href": "../materiais/bom.csv",
+      "detail": "Inventário proposto para a campanha."
+    }
+  ]
+}
